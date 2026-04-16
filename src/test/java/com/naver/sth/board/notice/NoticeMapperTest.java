@@ -23,5 +23,25 @@ class NoticeMapperTest {
 		
 		
 	}
+	@Test
+	void testCreate()throws Exception{
+		
+		for(int i =0;i<23;i++ ) {
+			NoticeDTO noticeDTO = new NoticeDTO();	
+			noticeDTO.setBoardTitle("title"+i);
+			noticeDTO.setBoardWriter("writer"+1);
+			noticeDTO.setBoardContents("contents"+i);
+			noticeMapper.create(noticeDTO);
+			if(i%3 ==0) {
+				Thread.sleep(500);
+				
+				
+			}
+			
+		}
+		System.out.println("끝");
+
+		
+	}
 
 }

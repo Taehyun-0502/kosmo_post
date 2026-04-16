@@ -7,11 +7,17 @@
   <mapper namespace="com.naver.sth.board.notice.NoticeMapper">
   	<!-- mapper.java의 메서드 명 -->
   	<select id="list" resultType="NoticeDTO">
+  		
+  		
   		SELECT * FROM "TB_NOTICE"
   	</select>
   
   
+  <insert id="create" parameterType="NoticeDTO">
+  	INSERT INTO "TB_NOTICE"
+  	VALUES (DEFAULT,#{boardTitle},#{boardWriter},#{boardContents},now(),0)
   
+  </insert>
   
   
   
