@@ -8,4 +8,5 @@ import com.naver.sth.board.BoardMapper;
 public interface NoticeMapper extends BoardMapper {
 
 	
+	
 }
