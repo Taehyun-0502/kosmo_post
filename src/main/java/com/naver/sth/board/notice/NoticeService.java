@@ -33,7 +33,7 @@ public class NoticeService implements BoardService {
 	@Override
 	public BoardDTO detail(BoardDTO boardDTO) throws Exception {
 		
-		return null;
+		return noticeMapper.detail(boardDTO);
 	}
 
 	@Override
@@ -65,9 +65,11 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int update(BoardDTO boardDTO) throws Exception {
+	public int update(BoardDTO boardDTO,MultipartFile [] attach) throws Exception {
 		
-		return 0;
+		int result = noticeMapper.update(boardDTO);
+		
+		return result;
 	}
 
 	@Override

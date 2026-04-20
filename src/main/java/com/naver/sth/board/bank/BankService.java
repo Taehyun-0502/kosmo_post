@@ -1,5 +1,6 @@
-package com.naver.sth.board.qna;
+package com.naver.sth.board.bank;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,64 +10,63 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.naver.sth.board.BoardDTO;
 import com.naver.sth.board.BoardService;
-import com.naver.sth.board.notice.NoticeFileDTO;
 import com.naver.sth.file.FileManager;
 import com.naver.sth.pager.Pager;
 
+
 @Service
-public class QnaService  implements BoardService{
-	
+public class BankService implements BoardService {
+
 	@Autowired
-	private QnaMapper qnaMapper;
+	private BankMapper bankMapper;
 	@Autowired
 	private FileManager fileManager;
-	@Value("${app.board.qna}")
+	@Value("${app.board.bank}")
 	private String name;
-
 	@Override
 	public List<BoardDTO> list(Pager pager) throws Exception {
-		pager.makePageNum(qnaMapper.getCount(pager));
-		
-		pager.makeStartNum();
-		
-		return qnaMapper.list(pager);
+		 
+		List<BoardDTO> ar = bankMapper.list(pager);
+		return ar;
 	}
 
 	@Override
 	public BoardDTO detail(BoardDTO boardDTO) throws Exception {
-		
-		return qnaMapper.detail(boardDTO);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public int create(BoardDTO boardDTO,MultipartFile[]attach) throws Exception {
-		int result = qnaMapper.create(boardDTO);
+	public int create(BoardDTO boardDTO, MultipartFile[] attach) throws Exception {
+		
+		int result = bankMapper.create(boardDTO);
 		
 		if(attach==null) {
-			
 			return result;
+			
 		}
+		
 		for(MultipartFile f:attach) {
 			if(f.isEmpty()) {
 				continue;
 			}
-			String fileName=fileManager.fileSave(name, f);
-			QnaFileDTO qnaFileDTO = new QnaFileDTO();
-			qnaFileDTO.setBoardNum(boardDTO.getBoardNum());
-			qnaFileDTO.setFileName(fileName);
-			qnaFileDTO.setOriName(f.getOriginalFilename());
-			result=qnaMapper.createFile(qnaFileDTO);
 			
+			String fileName=fileManager.fileSave(name, f);
+			
+			BankFileDTO bankFileDTO= new BankFileDTO();
+			bankFileDTO.setOriName(f.getOriginalFilename());
+			bankFileDTO.setFileName(fileName);
+			bankFileDTO.setBoardNum(boardDTO.getBoardNum());
+			result=bankMapper.createFile(bankFileDTO);
 		}
-		
 		
 		return result;
 	}
 
 	@Override
 	public int update(BoardDTO boardDTO,MultipartFile [] attach) throws Exception {
-		int result=qnaMapper.update(boardDTO);
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -74,6 +74,5 @@ public class QnaService  implements BoardService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-		
+
 }

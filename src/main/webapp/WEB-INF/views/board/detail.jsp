@@ -26,21 +26,21 @@
 		                    		<thead class="thead-dark">
 		                    			<tr>
 		                    				<th scope="col">글 번호</th>
+		                    				<th scope="col">작성자</th>
 		                    				<th scope="col">제목</th>
 		                    				<th scope="col">내용</th>
-		                    				<th scope="col">작성날짜</th>
-		                    				<th scope="col">조회 수</th>
-		                    				<th scope="col">작성자</th>
+		                    				<th scope="col">작성일</th>
+		                    				<th scope="col">조회수</th>
 		                    			</tr>
 		                    		</thead>
 		                    		<tbody>
 		                    			<tr>
-		                    				<td>${detail.commentNo} </td>
-		                    				<td>${detail.title} </td>
-											<td>${detail.contents}</td>
-		                    				<td>${detail.toDate} </td>
-		                    				<td>${detail.views} </td>
-		                    				<td>${detail.professorNo} </td>
+		                    				<td>${detail.boardNum} </td>
+		                    				<td>${detail.boardTitle} </td>
+		                    				<td>${detail.boardWriter} </td>
+											<td>${detail.boardContents}</td>
+		                    				<td>${detail.boardDate} </td>
+		                    				<td>${detail.boardHit} </td>
 		                    					
 		                    			</tr>
 		                    			<tr>
@@ -61,10 +61,10 @@
 		                    
 		                    </div>
 						<div>
-								<a  class="btn btn-primary" href="./update?commentNo=${detail.commentNo}">정보 수정</a>
+								<a  class="btn btn-primary" href="./update?boardNum=${detail.boardNum}">정보 수정</a>
 								
 								<form action="./delete" method="post">
-									<input type="hidden" name="professorNo" value="${detail.commentNo}">
+									<input type="hidden" name="boardNum" value="${detail.boardNum}">
 								<button type="submit" class="btn btn-primary"> 삭제</button>
 								</form>
 								

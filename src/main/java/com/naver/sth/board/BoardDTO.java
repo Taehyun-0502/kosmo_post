@@ -2,6 +2,9 @@ package com.naver.sth.board;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.naver.sth.file.FileDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +21,9 @@ public class BoardDTO {
 	private String boardContents;
 	private LocalDateTime boardDate;
 	private Long boardHit;
+	
+	private List<FileDTO> list;
+	
 	
 	
 	

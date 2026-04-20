@@ -75,7 +75,8 @@ public class Pager {
 		//4.현재 블럭 번호로 시작번호 끝번호 구하기
 		 start=(curBlock-1)*perBlock+1;
 		 end=curBlock*perBlock;
-		
+		 this.setStart(start);
+		this.setEnd(end);
 		//5. 현재 블럭 번호가 총블럭 번호와 같다면 
 		if(curBlock==totalBlock) {
 			end=totalPage;

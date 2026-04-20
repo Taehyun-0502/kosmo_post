@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,11 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
+	@ModelAttribute("name")
+	public String getname() {
+		
+		return "notice";
+	}
 	
 	@GetMapping("list")
 	public String list(Pager pager,Model model)throws Exception {
@@ -47,10 +53,31 @@ public class NoticeController {
 		return "redirect:./list";
 		
 	}
+	@GetMapping("detail")
+	public String detail(NoticeDTO noticeDTO,Model model)throws Exception {
+		
+		BoardDTO boardDTO = noticeService.detail(noticeDTO);
+		model.addAttribute("detail", boardDTO);
+		
+		return "board/detail";
+		
+	}
+	@GetMapping("update")
+	public String update(NoticeDTO noticeDTO,Model model)throws Exception{
+		BoardDTO boardDTO = noticeService.detail(noticeDTO);
+		
+		model.addAttribute("dto", boardDTO);
+		return "board/update";
+		
+		
+	}
+	@PostMapping("update")
+	public String update(NoticeDTO noticeDTO,@RequestParam("attach") MultipartFile [] attach)throws Exception{
+		
+		int result = noticeService.update(noticeDTO, attach);
 	
-	
-	
-	
+		return "redirect:./list";
+	}
 	
 	
 	

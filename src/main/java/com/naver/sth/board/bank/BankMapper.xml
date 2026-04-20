@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- mapper.java에 풀패키지명.클래스명 -->
+  <mapper namespace="com.naver.sth.board.bank.BankMapper">
+  	<!-- mapper.java의 메서드 명 -->
+  	<sql id="search_sql">
+  		WHERE 
+  		<choose>
+  			<when test="kind=='v2'">
+  				"BOARD_CONTENTS"
+  			</when>
+  			<when test="kind=='v3'">
+  				"PRODUCT_TYPE"
+  			</when>
+  			<otherwise>"BOARD_TITLE"</otherwise>
+  		</choose>
+  		LIKE CONCAT('%',#{search},'%')
+  	</sql>
+  	
+  	
+  	<select id="list" resultType="BankDTO" parameterType="Pager">
+
+  		SELECT * FROM "TB_BANK"
+  		<include refid="search_sql"></include>
+  		ORDER BY "BOARD_NUM" DESC
+  		LIMIT #{perPage} OFFSET #{startNum}
+  	</select>
+ 
+ 		<resultMap type="BankDTO" id="listResult">
+	 		<id column="BOARD_NUM" property="boardNum"/>
+	 		<result column="BOARD_TITLE" property="boardTitle"/>
+ 			<result column="BOARD_CONTENTS" property="boardContents"/>	
+ 			<result column="PRODUCT_TYPE" property="productType"/>
+ 			<result column="PRODUCT_RATE" property="productRate"/>
+ 			
+ 			<association property="list" javaType="java.util.List">
+ 			<id column="FILE_NUM" property="fileNum"/>
+ 			<result column="FILE_NAME" property="fileName"/>
+ 			<result column="ORI_NAME" property="oriName"/>
+ 			<result column="BOARD_NUM" property="boardNum"/>
+ 			
+ 			</association>
+ 			
+ 		</resultMap>
+ 		
+  
+  <insert id="create" parameterType="BankDTO" useGeneratedKeys="true" keyProperty="boardNum">
+  	
+  	INSERT INTO "TB_BANK"
+  	VALUES (DEFAULT,#{boardTitle},#{boardContents},#{productType},#{productRate})
+  
+  </insert>
+  <select id="getCount" resultType="Long" parameterType="Pager">
+  SELECT COUNT("BOARD_NUM")FROM "TB_BANK"
+  <include refid="search_sql"></include>
+  </select>
+  
+  <insert id="createFile" parameterType="BankFileDTO">
+  	INSERT INTO "TB_BANKFILE"
+  	VALUES (DEFAULT,#{fileName},#{oriName},#{boardNum})
+  
+  </insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
