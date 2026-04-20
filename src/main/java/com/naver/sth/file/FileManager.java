@@ -14,6 +14,14 @@ public class FileManager {
 	@Value("${app.upload.base}")
 	private String path;
 	
+	public boolean fileDelete(String name, FileDTO fileDTO ) throws Exception{
+		File file = new File(path, name); //upload / **까지 만들어짐
+		file= new File(file, fileDTO.getFileName());
+		
+		return file.delete();
+		
+	}
+	
 	
 	
 	public String fileSave(String name,MultipartFile attach)throws Exception{

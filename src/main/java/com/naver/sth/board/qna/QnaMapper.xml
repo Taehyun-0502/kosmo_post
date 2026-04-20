@@ -76,10 +76,30 @@
   </update>
   
   
+  <delete id="delete" parameterType="QnaDTO">
+  DELETE FROM "TB_QNA"
+  WHERE "BOARD_NUM"=#{boardNum}
+  
+  </delete>
+  <delete id="fileDelete" parameterType="FileDTO">
+  DELETE FROM "TB_QNAFILE"
+  WHERE "FILE_NUM"=#{fileNum}
   
   
+  </delete>
   
+  <delete id="fileDeleteFor" parameterType="java.util.List">
+  DELETE FROM "TB_QNAFILE"
+  WHERE 
+  	"FILE_NUM"IN
+  	<foreach item="item" index="index" collection="list" 
+  	 open="(" separator="," close=")" >
+  		#{item.fileNum}
+  	</foreach>
   
+ 
+  
+  </delete>
   
   
   

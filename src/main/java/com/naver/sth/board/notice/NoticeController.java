@@ -79,8 +79,13 @@ public class NoticeController {
 		return "redirect:./list";
 	}
 	
-	
-	
+	@PostMapping("delete")
+	public String delete(NoticeDTO noticeDTO) throws Exception {
+		int result = noticeService.delete(noticeDTO);
+		
+		return "redirect:./list";
+		
+	}
 	
 	
 	

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.naver.sth.board.BoardDTO;
 import com.naver.sth.board.BoardService;
 import com.naver.sth.board.notice.NoticeFileDTO;
+import com.naver.sth.file.FileDTO;
 import com.naver.sth.file.FileManager;
 import com.naver.sth.pager.Pager;
 
@@ -71,8 +72,18 @@ public class QnaService  implements BoardService{
 
 	@Override
 	public int delete(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		 	
+		boardDTO = qnaMapper.detail(boardDTO);
+		for(FileDTO fileDTO:boardDTO.getList()) {
+			//qnaMapper.fileDelete(fileDTO);
+		fileManager.fileDelete(name,fileDTO);
+		}
+		qnaMapper.fileDeleteFor(boardDTO.getList());
+		
+		int result=qnaMapper.delete(boardDTO);
+		
+		
+		return result;
 	}
 	
 		

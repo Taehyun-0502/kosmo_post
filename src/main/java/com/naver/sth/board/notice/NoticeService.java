@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.naver.sth.board.BoardDTO;
 import com.naver.sth.board.BoardService;
+import com.naver.sth.file.FileDTO;
 import com.naver.sth.file.FileManager;
 import com.naver.sth.pager.Pager;
 
@@ -75,7 +76,15 @@ public class NoticeService implements BoardService {
 	@Override
 	public int delete(BoardDTO boardDTO) throws Exception {
 		
-		return 0;
+		boardDTO = noticeMapper.detail(boardDTO);
+		//하드 디스크에서 파일 삭제 하는 코드 
+		for(FileDTO fileDTO:boardDTO.getList()) {
+		fileManager.fileDelete(name, fileDTO);
+		}
+		
+		//db에서 삭제 코드
+		int result =noticeMapper.delete(boardDTO);
+		return result;
 	}
 
 	

@@ -35,7 +35,7 @@
 								<label for="boardWriter">작성자</label>
 								
 								 <input
-									type="text" name="boardWriter" value="${dto.boardWriter}" class="form-control" id="boardWriter">
+									type="text" name="boardWriter" value="${dto.boardWriter}" readonly class="form-control" id="boardWriter">
 							</div>
 							<div class="form-group">
 								<label for="boardContents">내용</label>
