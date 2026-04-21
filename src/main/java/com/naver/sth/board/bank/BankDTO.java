@@ -17,5 +17,6 @@ public class BankDTO extends BoardDTO{
 	private String productType;
 	private double productRate;
 	
+	private BankFileDTO bankFileDTO;
 	
 }

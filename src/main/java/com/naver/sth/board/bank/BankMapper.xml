@@ -21,11 +21,13 @@
   	</sql>
   	
   	
-  	<select id="list" resultType="BankDTO" parameterType="Pager">
+  	<select id="list" resultMap="listResult" parameterType="BankDTO">
 
-  		SELECT * FROM "TB_BANK"
-  		<include refid="search_sql"></include>
-  		ORDER BY "BOARD_NUM" DESC
+  		SELECT * FROM "TB_BANK" b
+  		LEFT JOIN "TB_BANKFILE" bf
+  		USING ("BOARD_NUM")
+  		WHERE "BOARD_NUM"=#{boardNUM}
+  		<!-- ORDER BY "BOARD_NUM" DESC -->
   		LIMIT #{perPage} OFFSET #{startNum}
   	</select>
  
