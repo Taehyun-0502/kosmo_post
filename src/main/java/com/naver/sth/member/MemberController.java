@@ -56,6 +56,12 @@ public class MemberController {
 		return "redirect:/";
 		
 	}
+	@GetMapping("mypage")
+	public String mypage()throws Exception {
+		
+		return "member/mypage";
+	}
+	
 	
 	
 }
