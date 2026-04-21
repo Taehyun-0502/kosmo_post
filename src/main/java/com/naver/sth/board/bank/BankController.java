@@ -3,9 +3,11 @@ package com.naver.sth.board.bank;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,11 +23,19 @@ public class BankController {
 	@Autowired
 	private BankService bankService;
 	
+	@Value("${app.board.bank}")
+	private String name;
+	
+	@ModelAttribute("name")
+	public String getname() {
+		return this.name;
+	}
+	
 	@GetMapping("list")
 	public String list(Pager pager,Model model)throws Exception{
 		
 		
-		List<BoardDTO>ar =bankService.list(pager);
+		List<BankDTO> ar= bankService.list(pager);
 		
 		model.addAttribute("list", ar);
 		
@@ -37,12 +47,17 @@ public class BankController {
 		return "/bank/create";
 	}
 	@PostMapping("create")
-	public String create(BankDTO bankDTO,@RequestParam("attach") MultipartFile [] attach)throws Exception {
+	public String create(BankDTO bankDTO,@RequestParam("attach") MultipartFile attach)throws Exception {
 		int result =bankService.create(bankDTO, attach);
 		
 		
 		return "redirect:./list";
 	}
-	
-	
+	@GetMapping("detail")
+	public void detail (BankDTO bankDTO, Model model) throws Exception{
+		bankDTO= bankService.detail(bankDTO);
+		
+		model.addAttribute("detail", bankDTO);
+		
+	}	
 }

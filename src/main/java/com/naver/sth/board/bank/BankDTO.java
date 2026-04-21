@@ -11,11 +11,13 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class BankDTO extends BoardDTO{
+public class BankDTO {
 
-	
+	private Long productNum;
+	private String productTitle;
+	private String productContents;
 	private String productType;
-	private double productRate;
+	private Double productRate;
 	
 	private BankFileDTO bankFileDTO;
 	

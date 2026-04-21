@@ -11,5 +11,5 @@ import lombok.Setter;
 @Getter
 public class BankFileDTO extends FileDTO{
 
-	private Long boardNum;
+	private Long productNum;
 }

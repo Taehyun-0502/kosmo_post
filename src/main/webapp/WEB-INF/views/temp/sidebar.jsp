@@ -40,7 +40,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         
                         <a class="collapse-item" href="/notice/list">공지사항</a>
-                        <a class="collapse-item" href="/member/join">회원가입</a>
+                        <a class="collapse-item" href="/bank/list">상품 리스트</a>
                     </div>
                 </div>
             </li>

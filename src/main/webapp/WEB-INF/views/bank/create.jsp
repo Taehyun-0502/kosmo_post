@@ -8,11 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/temp/head_css.jsp"></c:import>
- <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
-    
 </head>
 <body id="page-top">
-	
+
 	<div id="wrapper">
 		<c:import url="/WEB-INF/views/temp/sidebar.jsp"></c:import>
 		<div id="content-wrapper" class="d-flex flex-column">
@@ -22,41 +20,42 @@
 
 				<div class="container-fluid">
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Create Page</h1>
-					<!-- 입력 폼 시작 -->
+					<h1 class="h3 mb-4 text-gray-800">회원가입</h1>
+
 					<div>
-						<form action="./create" enctype="multipart/form-data" method="post">
+						<form action="./create" method="post" enctype="multipart/form-data">
 							<div class="form-group">
-								<label for="boardTitle">상품 명</label> <input
-									type="text" name="boardTitle" class="form-control" id="boardTitle">
+								<label for="productTitle">name</label> 
+								<input type="text"class="form-control" id="productTitle" name="productTitle" >
 							</div>
 							<div class="form-group">
-								<label for="productType">상품 종류</label>
-								
-								 <input
-									type="text" name="productType" class="form-control" id="productType">
+								<label for="productContents">상세설명</label> 
+								<input type="text" class="form-control" id="productContents" name="productContents" >
 							</div>
+
 							<div class="form-group">
-								<label for="boardContents">상품 설명</label>
-								<textarea rows="8" cols=""name="boardContents"id="boardContents"class="form-control"></textarea>
-								
+								<label for="exampleInputPassword1">type</label> 
+								<input type="text" class="form-control" id="productType" name="productType">
 							</div>
+							<!-- <div class="form-group">
+								<label for="exampleInputPassword1">Password 확인</label> 
+								<input type="password" class="form-control" name="password" id="password">
+							</div> -->
 							<div class="form-group">
-								<label for="productRate">상품 이율</label>
-								<input
-									type="text" name="productRate" class="form-control" id="productRate">
-								
+								<label for="productRate">이자율</label> 
+								<input type="text" class="form-control" id="productRate" name="productRate">
 							</div>
+							
 							<div class="form-group">
-								 <label>첨부파일</label>
-								 <input type="file" name="attach" class="form-control">
-								 <input type="file" name="attach" class="form-control">
+								<label for="file">img</label>
+								<input type="file" class="form-control-file" id="attach"name="attach">
 							</div>
-							<button type="submit" class="btn btn-primary">등록</button>
+
+							<button type="submit" class="btn btn-primary">상품등록</button>
 						</form>
 
-					</div>
 
+					</div>
 
 
 				</div>
@@ -69,14 +68,7 @@
 		<!-- end content wrapper  -->
 	</div>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 	<!-- end wrapper  -->
-	<script>
-      	$('#contents').summernote({
-        	placeholder: 'Hello Bootstrap 4',
-        	tabsize: 2,
-        	height: 100
-      	});
-    </script>
+
 </body>
 </html>

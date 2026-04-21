@@ -20,99 +20,55 @@
 
 				<div class="container-fluid">
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">${name}</h1>
-					<div class="row justify-content-center">
-						<div class="col-6">
-							<!-- 검색 폼 -->
+					<h1 class="h3 mb-4 text-gray-800">product List Page</h1>
 
-							<div>
-								<form action="./list" method="get">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<select name="kind" class="custom-select">
-												<option ${pager.kind eq'v1'?'selected':''} value="v1">Title</option>
-												<option ${pager.kind eq'v2'?'selected':''} value="v2">Contents</option>
-												<option ${pager.kind eq'v3'?'selected':''} value="v3">Whiter</option>
-											</select>
-										</div>
+					<div class="row">
+						<c:forEach items="${list}" var="p">
+							<div class="col-4">
+								<div class="card" style="width: 18rem;">
+									<img src="/files/${name}/${p.bankFileDTO.fileName}"
+										class="card-img-top" alt="...">
+									<div class="card-body">
+										<h5 class="card-title">${p.productTitle}</h5>
 
-										<input type="text" value="${pager.search}" name="search"
-											class="form-control" placeholder="Recipient's username"
-											aria-label="Recipient's username"
-											aria-describedby="button-addon2">
-										<div class="input-group-append">
-											<button class="btn btn-outline-secondary" type="submit"
-												id="button-addon2">검색</button>
-										</div>
+										<a href="./detail?productNum=${p.productNum}"
+											class="btn btn-primary">상세보기</a>
 									</div>
-								</form>
+								</div>
 							</div>
-
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th scope="col">상품 사진</th>
-										<th scope="col">상품 번호</th>
-										<th scope="col">상품명</th>																				
-										<th scope="col">상품 설명</th>
-										<th scope="col">상품 종류</th>
-									</tr>
-								</thead>
-								<tbody>
-									
-									<c:forEach items="${list}" var="d">
-										<tr>
-										<td></td>
-											<td>${d.boardNum}</td>
-											<td> 
-												<a href="./detail?boardNum=${d.boardNum}"> 
-													<c:catch>
-														<c:forEach begin="1" end="${d.depth}">--</c:forEach>
-													</c:catch> ${d.boardTitle}
-												</a>
-											</td>
-											<td>${d.boardContents}</td>
-											<td>${d.productType}</td>
-											
-											<!-- card form -->
-										
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							<div>
-								<nav aria-label="Page navigation example">
-									<ul class="pagination">
-										<li class="page-item ${pager.pre?'':'disabled'}"><a
-											class="page-link"
-											href="./list?page=${pager.pre?pager.start-1:pager.start}&search=${pager.search}&kind=${pager.kind} "
-											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-										</a></li>
-										<c:forEach begin="${pager.start}" end="${pager.end}" var="i">
-
-											<li class="page-item"><a class="page-link"
-												href="./list?page=${i}&search=${pager.search}&kind=${pager.kind}">${i}</a></li>
-										</c:forEach>
-										<li class="page-item ${pager.next?'':'disabled'}"><a
-											class="page-link"
-											href="./list?page=${pager.next?pager.end+1:pager.end}&search=${pager.search}&kind=${pager.kind}"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										</a></li>
-									</ul>
-								</nav>
-
-
-
-
-
-							</div>
-							<div>
-								<a href="./create">공지 등록</a>
-							</div>
-
-
-						</div>
+						</c:forEach>
 					</div>
+					<div>
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<li class="page-item ${pager.pre?'':'disabled'}"><a
+									class="page-link"
+									href="./list?page=${pager.pre?pager.start-1:pager.start}&search=${pager.search}&kind=${pager.kind} "
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+								<c:forEach begin="${pager.start}" end="${pager.end}" var="i">
+
+									<li class="page-item"><a class="page-link"
+										href="./list?page=${i}&search=${pager.search}&kind=${pager.kind}">${i}</a></li>
+								</c:forEach>
+								<li class="page-item ${pager.next?'':'disabled'}"><a
+									class="page-link"
+									href="./list?page=${pager.next?pager.end+1:pager.end}&search=${pager.search}&kind=${pager.kind}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
+							</ul>
+						</nav>
+
+
+
+
+
+					</div>
+					<a href="./create">상품 등록</a>
+
+
+
+
 				</div>
 				<!-- end page content fluid -->
 			</div>

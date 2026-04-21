@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.naver.sth.board.BoardDTO;
+
 import com.naver.sth.board.BoardService;
 import com.naver.sth.file.FileManager;
 import com.naver.sth.pager.Pager;
 
 
 @Service
-public class BankService implements BoardService {
+public class BankService  {
 
 	@Autowired
 	private BankMapper bankMapper;
@@ -23,54 +23,49 @@ public class BankService implements BoardService {
 	private FileManager fileManager;
 	@Value("${app.board.bank}")
 	private String name;
-	@Override
-	public List<BoardDTO> list(Pager pager) throws Exception {
-		 
-		List<BoardDTO> ar = bankMapper.list(pager);
-		return ar;
+	@Value("${app.upload.base}")
+	private String path;
+	
+	public List<BankDTO> list(Pager pager) throws Exception {
+		 pager.makePageNum(bankMapper.getCount(pager));
+		 pager.makeStartNum();
+		 return  bankMapper.list(pager);
+		
 	}
 
-	@Override
-	public BoardDTO detail(BoardDTO boardDTO) throws Exception {
+	
+	public BankDTO detail(BankDTO bankDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return bankMapper.detail(bankDTO);
 	}
 
-	@Override
-	public int create(BoardDTO boardDTO, MultipartFile[] attach) throws Exception {
+	
+	public int create(BankDTO bankDTO, MultipartFile attach) throws Exception {
 		
-		int result = bankMapper.create(boardDTO);
+		int result = bankMapper.create(bankDTO);
 		
-		if(attach==null) {
-			return result;
-			
-		}
-		
-		for(MultipartFile f:attach) {
-			if(f.isEmpty()) {
-				continue;
-			}
-			
-			String fileName=fileManager.fileSave(name, f);
-			
-			BankFileDTO bankFileDTO= new BankFileDTO();
-			bankFileDTO.setOriName(f.getOriginalFilename());
+		if(attach != null && !attach.isEmpty()) {
+			String fileName=fileManager.fileSave(name, attach);
+			BankFileDTO bankFileDTO=new BankFileDTO();
 			bankFileDTO.setFileName(fileName);
-			bankFileDTO.setBoardNum(boardDTO.getBoardNum());
-			result=bankMapper.createFile(bankFileDTO);
+			bankFileDTO.setOriName(attach.getOriginalFilename());
+			bankFileDTO.setProductNum(bankDTO.getProductNum());
+			bankMapper.createFile(bankFileDTO);
 		}
+		
+	
 		
 		return result;
 	}
 
-	@Override
-	public int update(BoardDTO boardDTO,MultipartFile [] attach) throws Exception {
+	
+	public int update(BankDTO bankDTO,MultipartFile [] attach) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	public int delete(BoardDTO boardDTO) throws Exception {
+	
+	public int delete(BankDTO bankDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
