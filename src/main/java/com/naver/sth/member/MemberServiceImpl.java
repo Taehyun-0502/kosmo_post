@@ -17,6 +17,12 @@ public class MemberServiceImpl implements MemberService {
 	private FileManager fileManager;
 		
 	@Override
+	public MemberDTO idCheck(MemberDTO memberDTO) throws Exception {
+		return memberMapper.detail(memberDTO);
+	}
+	
+	
+	@Override
 	public int join(MemberDTO memberDTO, MultipartFile file) throws Exception {
 			
 		int result= memberMapper.join(memberDTO);

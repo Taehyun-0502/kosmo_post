@@ -41,13 +41,15 @@
 								<textarea rows="8" cols=""name="boardContents"id="boardContents"class="form-control"></textarea>
 								
 							</div>
-							
-							<div class="form-group">
-								 <label>첨부파일</label>
-								 <input type="file" name="attach" class="form-control">
-								 <input type="file" name="attach" class="form-control">
+							<div>
+								<button type="button" id="add">File Add</button>
 							</div>
-							<button type="submit" class="btn btn-primary">등록</button>
+							<div class="form-group" id="result">
+							
+								 <label>첨부파일</label>
+								 
+							</div>
+							<button type="submit" id="create" class="btn btn-primary">등록</button>
 						</form>
 
 					</div>
@@ -73,5 +75,6 @@
         	height: 100
       	});
     </script>
+    <script src="/js/board/form.js"></script>
 </body>
 </html>
