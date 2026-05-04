@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.naver.sth.file.FileDTO;
 import com.naver.sth.pager.Pager;
 
 
@@ -18,4 +19,8 @@ public interface BoardService {
 	public int update(BoardDTO boardDTO,MultipartFile [] attach)throws Exception;
 	
 	public int delete(BoardDTO boardDTO)throws Exception;
+	
+	public FileDTO fileDetail(FileDTO fileDTO)throws Exception;
+	
+	
 }

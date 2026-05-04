@@ -26,11 +26,11 @@
 						<form action="./login" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="username">username(ID)</label> 
-								<input type="text"class="form-control" id="username" name="username" >
+								<input type="text"class="form-control" id="username" name="username" value="xogus">
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1">Password</label> 
-								<input type="password" class="form-control" id="password" name="password">
+								<input type="password" class="form-control" id="password" name="password" value="a132">
 							</div>
 							
 

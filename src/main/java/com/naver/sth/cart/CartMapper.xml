@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.naver.sth.cart.CartMapper">
+  <insert id="createCart" parameterType="CartDTO">
+  	INSERT INTO "TB_CART"
+  	VALUES (#{username},#{productNum})
+  
+  </insert>
+  
+  <select id="list" resultMap="joinResult" parameterType="MemberDTO">
+	SELECT 	c."PRODUCT_NUM",
+			b."PRODUCT_TITLE",
+			b."PRODUCT_RATE",
+			bf."FILE_NAME"
+	FROM "TB_CART" c
+		LEFT JOIN "TB_BANK" b
+		on c."PRODUCT_NUM" = b."PRODUCT_NUM"
+			LEFT JOIN "TB_BANKFILE" bf
+			on b."PRODUCT_NUM"= bf."PRODUCT_NUM"
+	WHERE c."USERNAME"=#{username}
+  </select>
+  <resultMap type="BankDTO" id="joinResult">
+	 		<id column="PRODUCT_NUM" property="productNum"/>
+	 		<result column="PRODUCT_TITLE" property="productTitle"/>
+ 			<result column="PRODUCT_CONTENTS" property="productContents"/>	
+ 			<result column="PRODUCT_TYPE" property="productType"/>
+ 			<result column="PRODUCT_RATE" property="productRate"/>
+ 			
+ 			<association property="bankFileDTO" javaType="BankFileDTO">
+ 			<id column="FILE_NUM" property="fileNum"/>
+ 			<result column="FILE_NAME" property="fileName"/>
+ 			<result column="ORI_NAME" property="oriName"/>
+ 			<result column="PRODUCT_NUM" property="productNum"/>
+ 			
+ 			</association>
+ 			
+ 		</resultMap>
+  <!-- <delete id="delete" parameterType="CartDTO">
+  	DELETE FROM "TB_CART"
+  	WHERE "PRODUCT_NUM"=#{productNum}
+  	AND "USERNAME"=#{username}
+  
+  </delete> -->
+  <delete id="delete" parameterType="java.util.List">
+  	DELETE FROM "TB_CART"
+  	<foreach collection="list" item="item" open="where" separator="or">
+  	
+  	"PRODUCT_NUM"=#{item.productNum}
+  	AND "USERNAME"=#{item.username}
+  	
+  	</foreach>
+  </delete>
+  
+  
+  
+  
+  
+  
+  </mapper>

@@ -46,7 +46,7 @@
 		                    			<tr>
 		                    				<div >
 		                    				<c:forEach items="${detail.list}" var="f">
-		                    				<td><img src="/files/${name}/${f.fileName}"> ${f.oriName}</td>
+		                    				<td><a href="./down?fileNum=${f.fileNum}">${f.oriName}</a> </td>
 		                    				</c:forEach>
 		                    				</div>
 		                    			</tr>

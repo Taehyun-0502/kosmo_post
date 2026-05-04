@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.naver.sth.board.BoardDTO;
+import com.naver.sth.file.FileDTO;
 import com.naver.sth.file.FileManager;
 import com.naver.sth.pager.Pager;
 
@@ -37,6 +39,19 @@ public class QnaController {
         this.fileManager = fileManager;
     }
 	
+    
+    @GetMapping("down")
+    public String fileDown(QnaFileDTO qnaFileDTO,Model model)throws Exception{
+    	
+    	FileDTO fileDTO=qnaService.fileDetail(qnaFileDTO);
+    	
+    	model.addAttribute("fileDTO", fileDTO);
+    	
+    	return "fileDownView";
+    	
+    }
+    
+    
 	@GetMapping("list")
 	public String list(Pager pager,Model model) throws Exception{
 		
@@ -77,11 +92,16 @@ public class QnaController {
 		return "board/update";
 	}
 	@PostMapping("update")
-	public String update(QnaDTO qnaDTO ,@RequestParam("attach") MultipartFile [] attach )throws Exception {
+	public ModelAndView update(QnaDTO qnaDTO ,@RequestParam("attach") MultipartFile [] attach )throws Exception {
 		
 		int result = qnaService.update(qnaDTO, attach);
 		
-		return "redirect:./list";
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("redirect:./list");
+		mv.addObject("dto",qnaDTO);
+		
+		
+		return mv;
 	}
 	@PostMapping("delete")
 	public String delete(QnaDTO qnaDTO) throws Exception{

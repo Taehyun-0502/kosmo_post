@@ -40,6 +40,13 @@ public class QnaService  implements BoardService{
 	}
 
 	@Override
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception {
+		
+		return qnaMapper.fileDetail(fileDTO);
+	}
+	
+	
+	@Override
 	public int create(BoardDTO boardDTO,MultipartFile[]attach) throws Exception {
 		int result = qnaMapper.create(boardDTO);
 		

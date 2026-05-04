@@ -21,4 +21,6 @@ public interface BankMapper {
 	
 	public int createFile(BankFileDTO bankFileDTO)throws Exception;
 	
+	
+	
 }

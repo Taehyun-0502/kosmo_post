@@ -28,6 +28,9 @@
 								<c:if test="${empty member}">
 								<h3>비 로그인 상태</h3>
 								</c:if>
+								<div id="map"  style="width:500px;height:400px">
+								</div>
+								
 								
 	                </div>
 				<!-- end page content fluid -->
@@ -40,6 +43,16 @@
 	</div>
 	<c:import url="/WEB-INF/views/temp/footer_script.jsp"></c:import>
 	<!-- end wrapper  -->
+	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?></script>
+	<script>
+	const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		let options = { 
+		center: new kakao.maps.LatLng(33.450701, 126.570667), 
+		level: 3 
+	};
+
+	let map = new kakao.maps.Map(container, options); 
+	</script> -->
 	
 </body>
 </html>
